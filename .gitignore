@@ -3,3 +3,7 @@
 FLASH
 RAM
 targetConfigs
+.ccsproject
+.cdtbuild
+.cproject
+.project
