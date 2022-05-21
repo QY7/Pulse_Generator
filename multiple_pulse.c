@@ -11,6 +11,7 @@
 #include "stdlib.h"
 #define PIN_NUM 8
 
+int a = 0;
 OPERATION operation[PIN_NUM*2];
 
 void copy_operation(OPERATION *src,OPERATION *dest);
