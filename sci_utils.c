@@ -128,6 +128,12 @@ void process_cmd(char *_cmd,unsigned char _len,HOST host){
                 update_data_flag = 1;
                 Tc = tmp_input;
                 break;
+            case 38:
+                //外循环
+                sscanf( input, "%f", &tmp_input);//convert to float
+                update_data_flag = 1;
+                voltage_max = tmp_input;
+                break;
             case 0x08:
                 //turn on PWM
                 //start timer;
