@@ -8,7 +8,7 @@
 #ifndef GLOBAL_FUNCS_H_
 #define GLOBAL_FUNCS_H_
 
-extern inline void delay_us(unsigned int delay);
+extern inline void delay_us(float delay);
 
 
 

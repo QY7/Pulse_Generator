@@ -7,7 +7,7 @@
 #include "global_defs.h"
 #include "system_state.h"
 #include "APWM_utils.h"
-
+#include "memory_management.h"
 void set_pwm_width(unsigned char channel,float duty);
 void set_pwm_phase(float n_us);
 void set_pwm_frequency(Uint32 period_in);
@@ -37,6 +37,18 @@ unsigned int test_data = 0;
 extern unsigned int received_len;
 //当等于1的时候，需要等待RX拉高，reset
 char reset_flag = 0;
+
+
+unsigned char data_flash[4] = {'a','b','c','d'};
+
+unsigned char dataflash_back[4] = {0,0,0,0};
+
+inline void delay_us(float delay){
+    long delay_tmp = (long)(delay*18.018-1.8);
+    DSP28x_usDelay(delay_tmp);
+}
+
+
 void main(void)
 {
 //    Uint16 ReceivedChar;
@@ -138,6 +150,14 @@ void main(void)
     initScreenDate();
     state = OFF;
     add_data_channel();
+
+    BSP_M25P16_Init();
+
+//    delay_us(100000);
+//    while(BSP_M25P16_WriteData(0, 0, 0, 1, data_flash));
+//    save_params();
+    delay_us(10000);
+    load_params();
     for(;;)
     {
         if(test_flag == 1){
@@ -272,10 +292,7 @@ void init_ext_int(){
 //    XIntruptRegs.XINT2CR.bit.ENABLE = 1;        // Enable XINT2
     EDIS;
 }
-inline void delay_us(float delay){
-    long delay_tmp = (long)(delay*18.018-1.8);
-    DSP28x_usDelay(delay_tmp);
-}
+
 void enableOnePulseGPIO(){
     EALLOW;
 

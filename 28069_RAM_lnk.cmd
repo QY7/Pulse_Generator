@@ -79,7 +79,7 @@ PAGE 0 :
 
    BEGIN       : origin = 0x000000, length = 0x000002
    RAMM0       : origin = 0x000050, length = 0x0003B0
-   RAML0_L4    : origin = 0x008000, length = 0x004000	 /* RAML0-3 combined for size of .text */
+   RAML0_L5    : origin = 0x008000, length = 0x006000	 /* RAML0-3 combined for size of .text */
    														 /* in Example_F2806xSWPrioritezedInterrupts */
    RESET       : origin = 0x3FFFC0, length = 0x000002
    FPUTABLES   : origin = 0x3FD860, length = 0x0006A0	 /* FPU Tables in Boot ROM */
@@ -111,24 +111,24 @@ SECTIONS
    
    ramfuncs         : > RAMM0,      PAGE = 0
    
-   .text            : > RAML0_L4,   PAGE = 0
+   .text            : > RAML0_L5,   PAGE = 0
    .cinit           : > RAMM0,      PAGE = 0
    .pinit           : > RAMM0,      PAGE = 0
    .switch          : > RAMM0,      PAGE = 0
    .reset           : > RESET,      PAGE = 0, TYPE = DSECT /* not used, */
 
    .stack           : > RAML6,      PAGE = 1
-   .ebss            : > RAML5,      PAGE = 1
-   .econst          : > RAML5,      PAGE = 1
-   .esysmem         : > RAML5,      PAGE = 1
+   .ebss            : > RAML7,      PAGE = 1
+   .econst          : > RAML7,      PAGE = 1
+   .esysmem         : > RAML7,      PAGE = 1
 
-   IQmath           : > RAML0_L4,   PAGE = 0
+   IQmath           : > RAML0_L5,   PAGE = 0
    IQmathTables     : > IQTABLES,   PAGE = 0, TYPE = NOLOAD
    
    /* Allocate FPU math areas: */
    FPUmathTables    : > FPUTABLES,  PAGE = 0, TYPE = NOLOAD
    
-   DMARAML5	        : > RAML5,      PAGE = 1
+   DMARAML5	        : > RAML7,      PAGE = 1
    DMARAML6	        : > RAML6,      PAGE = 1
    DMARAML7	        : > RAML7,      PAGE = 1
    DMARAML8	        : > RAML8,      PAGE = 1   
