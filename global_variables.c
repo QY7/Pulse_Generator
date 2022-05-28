@@ -68,8 +68,11 @@ float D1 = 5;
 float Tw = 1;
 float Tc = 100;
 
+float Tx = 0;
+
 float D2 = 10;
 float M34 = 20;
+float M34test = 0;
 float phase2 = 3;
 
 float timer_minute = 0.0;

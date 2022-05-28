@@ -121,7 +121,7 @@ SECTIONS
 {
 
    /* Allocate program areas: */
-   .cinit              : > FLASHA,     PAGE = 0
+   .cinit              : > FLASHC,     PAGE = 0
    .pinit              : > FLASHA,     PAGE = 0
    .text               : > FLASHA,     PAGE = 0
    codestart           : > BEGIN,      PAGE = 0

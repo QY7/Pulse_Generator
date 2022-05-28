@@ -4,7 +4,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.TMS320F28069.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx" value="${build_artifact:ten_pulse_2022_5_15}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.TMS320F28069.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx" value="ten_pulse_2022_5_15"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:ten_pulse_2022_5_15}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS320F28069.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx" value="D:\Documents\workspace\ccs\ten_pulse_2022_5_15\FLASH\Example_2806xSci_Echoback.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS320F28069.ccxml.Texas Instruments XDS100v2 USB Debug Probe/C28xx" value="D:\Documents\workspace\ccs\ten_pulse_2022_5_15\RAM\Example_2806xSci_Echoback.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/ten_pulse_2022_5_15"/>
 </listAttribute>
