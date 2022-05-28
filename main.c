@@ -48,7 +48,8 @@ inline void delay_us(float delay){
     DSP28x_usDelay(delay_tmp);
 }
 
-
+#define SAMPLE_BIAS 2000
+#define SAMPLE_GAIN 100
 void main(void)
 {
 //    Uint16 ReceivedChar;
@@ -217,7 +218,9 @@ void main(void)
         }
         if(sample_finished_flag){
             sampled_voltage = AdcResult.ADCRESULT0;
-            sampled_voltage_conv = (1.63-sampled_voltage*3.3/4095)*2.2;
+//            修改SAMPLE_GAIN使得采样之后转换的数据sampled_voltage_conv等于实际的电压
+//            修改SAMPLE_BIAS，使得没有电压的时候数据为0
+            sampled_voltage_conv = (sampled_voltage-SAMPLE_BIAS)*3.3/4095*SAMPLE_GAIN;
             sample_finished_flag = 0;
             char tmp[20];
             tmp[0] = 0x3A;
@@ -232,7 +235,7 @@ void main(void)
             }
 //           最大是voltage_max
             update_progress(2035-sampled_voltage*100/voltage_max);
-            if(sampled_voltage>voltage_max){
+            if((sampled_voltage_conv>voltage_max)||(sampled_voltage_conv<-voltage_max)){
 //                如果采样到的电压比最大的电压高，停止充电
                 stop_cmd_flag = 1;
             }
