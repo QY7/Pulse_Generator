@@ -261,7 +261,6 @@ void set_pwm_frequency(Uint32 period_in){
     ECap2Regs.TSCTR = 0;
 }
 
-
 void stop_PWM(){
     EALLOW;
     GpioCtrlRegs.GPAMUX1.bit.GPIO5 = 0;     // Configure GPIO5 as CAP1

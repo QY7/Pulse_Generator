@@ -25,6 +25,7 @@ void add_to_list(unsigned int value){
     params_to_save[save_index*2+1] = value&0xFF;
     save_index++;
 }
+
 void save_params(){
 //   ÏÈ²Á³ıÊı¾İ
     BSP_M25P16_ErasureSector(0);
