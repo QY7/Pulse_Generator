@@ -77,9 +77,10 @@ extern enum sys_state pre_state;
 extern char rdataA[50];    // Received data for SCI-A
 extern char rdataB[50];    // Received data for SCI-B
 extern char stop_cmd_flag;
+extern char over_voltage_flag;
 extern char one_pulse_flag;
 extern unsigned char sample_finished_flag;
-extern unsigned int voltage_max;
+extern int voltage_max;
 extern int sampled_voltage;
 extern float sampled_voltage_conv;
 //�жϺ���

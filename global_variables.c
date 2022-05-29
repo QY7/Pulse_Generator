@@ -87,10 +87,11 @@ char rdataA[50];    // Received data for SCI-A
 char rdataB[50];    // Received data for SCI-B
 
 char stop_cmd_flag = 0;//
+char over_voltage_flag = 0;
 char one_pulse_flag = 0;//
 
 int sampled_voltage = 0;
 float sampled_voltage_conv = 0;
-unsigned int voltage_max = 4800;  //设置充电电压上限，超过之后停止充电
+int voltage_max = 4800;  //设置充电电压上限，超过之后停止充电
 
 unsigned char sample_finished_flag = 0;

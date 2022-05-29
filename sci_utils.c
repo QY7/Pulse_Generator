@@ -132,7 +132,8 @@ void process_cmd(char *_cmd,unsigned char _len,HOST host){
                 //外循环
                 sscanf( input, "%f", &tmp_input);//convert to float
                 update_data_flag = 1;
-                voltage_max = tmp_input;
+//              减去上位机增加的10000的偏置
+                voltage_max = (tmp_input)*1000;
                 break;
             case 0x08:
                 //turn on PWM

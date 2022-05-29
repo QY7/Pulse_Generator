@@ -128,6 +128,13 @@ __interrupt void cpu_timer0_isr(void)
         }else{
             //计时，直到计数为Tw
             cnt++;
+            if(over_voltage_flag){
+//                如果检测到电压到了，那么关闭M1和M2，然后发后面几路的Pulse
+                state = CMD_WAIT;
+                one_pulse_flag = 1;
+                cnt = 0;
+                over_voltage_flag = 0;
+            }
         }
     }else{
         if(stop_cmd_flag == 1){

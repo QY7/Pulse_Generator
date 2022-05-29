@@ -123,7 +123,7 @@ SECTIONS
    /* Allocate program areas: */
    .cinit              : > FLASHC,     PAGE = 0
    .pinit              : > FLASHA,     PAGE = 0
-   .text               : > FLASHA,     PAGE = 0
+   .text               : >> FLASHE | FLASHF,     PAGE = 0
    codestart           : > BEGIN,      PAGE = 0
                          
    ramfuncs            : LOAD = FLASHD,

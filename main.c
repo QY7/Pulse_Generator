@@ -8,6 +8,7 @@
 #include "system_state.h"
 #include "APWM_utils.h"
 #include "memory_management.h"
+#include "math.h"
 void set_pwm_width(unsigned char channel,float duty);
 void set_pwm_phase(float n_us);
 void set_pwm_frequency(Uint32 period_in);
@@ -49,7 +50,7 @@ inline void delay_us(float delay){
 }
 
 #define SAMPLE_BIAS 2000
-#define SAMPLE_GAIN 100
+#define SAMPLE_GAIN 2
 void main(void)
 {
 //    Uint16 ReceivedChar;
@@ -218,9 +219,8 @@ void main(void)
         }
         if(sample_finished_flag){
             sampled_voltage = AdcResult.ADCRESULT0;
-//            修改SAMPLE_GAIN使得采样之后转换的数据sampled_voltage_conv等于实际的电压
-//            修改SAMPLE_BIAS，使得没有电压的时候数据为0
-            sampled_voltage_conv = (sampled_voltage-SAMPLE_BIAS)*3.3/4095*SAMPLE_GAIN;
+//            这里的SAMPLE_BIAS和SAMPLE_GAIN与上位机保持一致
+            sampled_voltage_conv = ((float)sampled_voltage-SAMPLE_BIAS)*SAMPLE_GAIN;
             sample_finished_flag = 0;
             char tmp[20];
             tmp[0] = 0x3A;
@@ -233,11 +233,21 @@ void main(void)
             if(state == ON){
                 add_data(sampled_voltage);
             }
-//           最大是voltage_max
-            update_progress(2035-sampled_voltage*100/voltage_max);
-            if((sampled_voltage_conv>voltage_max)||(sampled_voltage_conv<-voltage_max)){
-//                如果采样到的电压比最大的电压高，停止充电
-                stop_cmd_flag = 1;
+//           最大是voltage_max,用转换过后的电压与voltage_max作除法，得到比例
+//            由于voltage_max可能是负数，这里做了一次取绝对值
+            char complete_ratio = abs((char)((sampled_voltage_conv)*100/voltage_max));
+//            将完成比例上传到DSP
+            update_progress(complete_ratio);
+            if(voltage_max>0){
+//          如果voltage_max是正压，那么超过正压的时候触发过压
+                if(sampled_voltage_conv>voltage_max){
+                    over_voltage_flag = 1;
+                }
+            }else{
+//           如果voltage_max是负压，那么低于负压的时候触发过压
+                if(sampled_voltage_conv<voltage_max){
+                    over_voltage_flag = 1;
+                }
             }
         }
 
